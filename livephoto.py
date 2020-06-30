@@ -4,12 +4,13 @@ import pyautogui
 from datetime import datetime
 import glob
 import imageio
+import os
 
 
 livephoto = []
 
 
-for x in range(5):
+for x in range(20):
     image = pyautogui.screenshot()
 
 # convert RGB it to numpy array and BGR
@@ -30,4 +31,10 @@ images = []
 for photo in livephoto:
     images.append(imageio.imread(photo))
 imageio.mimsave(
-    '/home/kar7ik/livephotoapp/livephotoapp/live-photo-gif/livephoto.gif', images,duration=5)
+    '/home/kar7ik/livephotoapp/livephotoapp/live-photo-gif/livephoto_' +
+    str(datetime.now())+'.gif', images, duration=0.2)
+
+
+for filename in glob.glob('/home/kar7ik/livephotoapp/livephotoapp/live-photos/*'):
+    os.remove(filename)
+    print("Done")
